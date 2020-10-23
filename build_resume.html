@@ -8,6 +8,11 @@
   <body>
     <h1>Build Your Resume Here</h1>
     <script language="javascript">
+      var max_num_edu = 5;
+      var max_num_exp = 7;
+      var max_num_skill = 15;
+      var max_num_interest = 10;
+
       var num_edu = 0;
       var num_exp = 0;
       var num_skill = 0;
@@ -29,7 +34,13 @@
 
       function addEdu()
       {
-        var edu_item = `
+        if (num_edu == max_num_edu) {
+          alert("Too many education experiences.");
+          return;
+        }
+
+        var edu_item = document.createElement("DIV");
+        edu_item.innerHTML = `
           <form name="edu${num_edu}">
             <label for="school_name">School Name: </label>
             <input type="text" id="school_name" name="school_name"><br/><br/>
@@ -39,15 +50,21 @@
             <input type="text" id="description" name="description"><br/><br/>
             <label for="location">Location: </label>
             <input type="text" id="location" name="location"><br/><br/>
-          </form>
+          </form><br/><br/>
         `;
-        document.getElementById("edu").innerHTML += edu_item;
+        document.getElementById("edu").appendChild(edu_item);
         num_edu++;
       }
 
       function addExp()
       {
-        var exp_item =`
+        if (num_exp == max_num_exp) {
+          alert("Too many work experiences.");
+          return;
+        }
+
+        var exp_item = document.createElement("DIV");
+        exp_item.innerHTML = `
           <form name="exp${num_exp}">
             <label for="job_tile">Title: </label>
             <input type="text" id="job_title" name="job_title"><br/><br/>
@@ -59,29 +76,41 @@
             <input type="text" id="description" name="description"><br/><br/>
             <label for="location">Location: </label>
             <input type="text" id="location" name="location"><br/><br/>
-          </form>
+          </form><br/><br/>
         `;
-        document.getElementById("exp").innerHTML += exp_item;
+        document.getElementById("exp").appendChild(exp_item);
         num_exp++;
       }
 
       function addSkill()
       {
-        var skill_item = `
+        if (num_skill == max_num_skill) {
+          alert("Too many skills.");
+          return;
+        }
+
+        var skill_item = document.createElement("DIV");
+        skill_item.innerHTML = `
           <label for="skill${num_skill}">Skill: </label>
           <input type="text" id="skill${num_skill}" name="skill${num_skill}"><br/><br/>
         `;
-        document.getElementById("skill").innerHTML += skill_item;
+        document.getElementById("skill").appendChild(skill_item);
         num_skill++;
       }
 
       function addInterest()
       {
-        var interest_item = `
+        if (num_interest == max_num_interest) {
+          alert("Too many interests.");
+          return;
+        }
+
+        var interest_item = document.createElement("DIV");
+        interest_item.innerHTML = `
           <label for="interest${num_interest}">Interest: </label>
           <input type="text" id="interest${num_interest}" name="interest${num_interest}"><br/><br/>
         `;
-        document.getElementById("interest").innerHTML += interest_item;
+        document.getElementById("interest").appendChild(interest_item);
         num_interest++;
       }
 
@@ -145,7 +174,6 @@
         getExperiences(resume);
         getSkills(resume);
         getInterests(resume);
-        console.log(resume.interests[0]);
       }
 
     </script>
