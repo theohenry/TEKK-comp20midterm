@@ -32,6 +32,7 @@
         document.getElementById("submit").addEventListener("click", submit);
       }
 
+      //------------------ functions to add elements to the html ----------------------
       function addEdu()
       {
         if (num_edu == max_num_edu) {
@@ -114,49 +115,142 @@
         num_interest++;
       }
 
+      //------------------ functions to get values from the html ----------------------
       function getEducations(resume)
       {
         for (let i = 0; i < num_edu; i++) {
-          var edu = {
-            schoolName: document.forms[`edu${i}`]["school_name"].value,
-            gradDate: document.forms[`edu${i}`]["grad_date"].value,
-            description: document.forms[`edu${i}`]["description"].value,
-            location: document.forms[`edu${i}`]["location"].value
+          if (validate_edu_form(i)) {
+            // only non-empty forms are pushed
+            if (document.forms[`edu${i}`]["school_name"].value != "") {
+              var edu = {
+                schoolName: document.forms[`edu${i}`]["school_name"].value,
+                gradDate: document.forms[`edu${i}`]["grad_date"].value,
+                description: document.forms[`edu${i}`]["description"].value,
+                location: document.forms[`edu${i}`]["location"].value
+              }
+              resume["educations"].push(edu);
+            }
+          } else {
+            alert("Every field in each education item has to be filled or leave the entire education item blank");
+            return false;
           }
-          resume["educations"].push(edu);
         }
+        if (resume["educations"].length == 0) {
+          alert("At least one education required.");
+          return false;
+        }
+        return true;
       }
 
       function getExperiences(resume)
       {
         for (let i = 0; i < num_exp; i++) {
-          var exp = {
-            title: document.forms[`exp${i}`]["job_title"].value,
-            startDate: document.forms[`exp${i}`]["exp_start_date"].value,
-            endDate: document.forms[`exp${i}`]["exp_end_date"].value,
-            description: document.forms[`exp${i}`]["description"].value,
-            location: document.forms[`exp${i}`]["location"].value
+          if (validate_exp_form(i)) {
+            if (document.forms[`exp${i}`]["job_title"].value != "") {
+              var exp = {
+                title: document.forms[`exp${i}`]["job_title"].value,
+                startDate: document.forms[`exp${i}`]["exp_start_date"].value,
+                endDate: document.forms[`exp${i}`]["exp_end_date"].value,
+                description: document.forms[`exp${i}`]["description"].value,
+                location: document.forms[`exp${i}`]["location"].value
+              }
+              resume["experiences"].push(exp);
+            }
+          } else {
+            alert("Every field in each experience item has to be filled or leave the entire experience item blank");
+            return false;
           }
-          resume["experiences"].push(exp);
         }
+        if (resume["experiences"].length == 0) {
+          alert("At least one experiences required.");
+          return false;
+        }
+        return true;
       }
 
       function getSkills(resume)
       {
         for (let i = 0; i < num_skill; i++) {
-          resume["experiences"].push(document.getElementById(`skill${i}`).value);
+          if (document.getElementById(`skill${i}`).value != "") {
+            resume["skills"].push(document.getElementById(`skill${i}`).value);
+          }
         }
+        if (resume["skills"].length == 0) {
+          alert("At least one skill required.");
+          return false;
+        }
+        return true;
       }
 
       function getInterests(resume)
       {
         for (let i = 0; i < num_interest; i++) {
-          resume["interests"].push(document.getElementById(`interest${i}`).value);
+          if (document.getElementById(`interest${i}`).value != "") {
+            resume["interests"].push(document.getElementById(`interest${i}`).value);
+          }
         }
+        if (resume["interests"].length == 0) {
+          alert("At least one interest required.");
+          return false;
+        }
+        return true;
       }
 
+      //------------------ functions to validate input values ----------------------
+
+      function validate_info_form()
+      {
+        let form = document.forms["info"];
+        return (form["fname"].value       != "" &&
+                form["lname"].value       != "" &&
+                form["addr"].value        != "" &&
+                form["phone"].value       != "" &&
+                form["email"].value       != "" &&
+                form["linkedin"].value    != "" &&
+                form["description"].value != "");
+      }
+
+      function validate_edu_form(i)
+      {
+        let form = document.forms[`edu${i}`];
+        return (form["school_name"].value != "" &&
+                form["grad_date"].value   != "" &&
+                form["description"].value != "" &&
+                form["location"].value    != "") ||
+               (form["school_name"].value == "" &&
+                form["grad_date"].value   == "" &&
+                form["description"].value == "" &&
+                form["location"].value    == "" );
+      }
+
+      function validate_exp_form(i)
+      {
+        let form = document.forms[`exp${i}`];
+        let valid =
+               (form["job_title"].value      != "" &&
+                form["exp_start_date"].value != "" &&
+                form["exp_end_date"].value   != "" &&
+                form["description"].value    != "" &&
+                form["location"].value       != "") ||
+               (form["job_title"].value      == "" &&
+                form["exp_start_date"].value == "" &&
+                form["exp_end_date"].value   == "" &&
+                form["description"].value    == "" &&
+                form["location"].value       == "" ) ;
+        if (form["exp_start_date"].value > form["exp_end_date"].value) {
+          alert("The start date of your experience has to be earlier than the end date.");
+          valid = false;
+        }
+        return valid;
+      }
+
+      //------------------ submit function ----------------------
       function submit()
       {
+        if (!validate_info_form()) {
+          alert("Every field from the basic information section has to be filled");
+          return;
+        }
         var resume = {
           firstName: document.forms["info"]["fname"].value,
           lastName: document.forms["info"]["lname"].value,
@@ -170,19 +264,21 @@
           skills: [],
           interests: []
         };
-        getEducations(resume);
-        getExperiences(resume);
-        getSkills(resume);
-        getInterests(resume);
+        if (!getEducations(resume)) {return;}
+        if (!getExperiences(resume)) {return;}
+        if (!getSkills(resume)) {return;}
+        if (!getInterests(resume)) {return;}
       }
+
 
     </script>
 
     <form name="info">
+      <p>Basic information section:</p>
       <label for="fname">First Name: </label>
-      <input type="text" id="fname" name="fname"><br/><br/>
+      <input type="text" id="fname" name="fname" required><br/><br/>
       <label for="lname">Last Name: </label>
-      <input type="text" id="lname" name="lname"><br/><br/>
+      <input type="text" id="lname" name="lname" ><br/><br/>
       <label for="addr">Address: </label>
       <input type="text" id="addr" name="addr"><br/><br/>
       <label for="phone">Phone: </label>
@@ -193,19 +289,19 @@
       <input type="text" id="linkedin" name="linkedin"><br/><br/>
       <label for="description">Description: </label>
       <input type="text" id="description" name="description"><br/><br/>
-    </form>
+    </form><br/><br/>
 
     <input type="button" id="add_edu" value="Add Education"/><br/><br/>
-    <div id="edu"><div></div></div><br/><br/>
+    <div id="edu"><p>Education section:</p></div><br/><br/>
 
-    <input type="button" id="add_exp" value="Add Work Experience"/><br/><br/>
-    <div id="exp"><div></div></div><br/><br/>
+    <input type="button" id="add_exp" value="Add Work Experience"/><br/>
+    <div id="exp"><p>Work Experience section:</p></div><br/><br/>
 
-    <input type="button" id="add_skill" value="Add Skills"/><br/><br/>
-    <div id="skill"><div></div></div><br/><br/>
+    <input type="button" id="add_skill" value="Add Skills"/><br/>
+    <div id="skill"><p>Skills section:</p></div><br/><br/>
 
-    <input type="button" id="add_interest" value="Add Interest"/><br/><br/>
-    <div id="interest"><div></div></div><br/><br/>
+    <input type="button" id="add_interest" value="Add Interest"/><br/>
+    <div id="interest"><p>Interests section:</p></div><br/><br/>
 
     <input type="button" id="submit" value="Done"/>
     <br/>
