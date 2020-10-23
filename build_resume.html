@@ -49,6 +49,8 @@
         addSkill();
         addInterest();
 
+        fill_form(); // Note: this function is only for testing purposes
+
         document.getElementById("add_edu").addEventListener("click", addEdu);
         document.getElementById("add_exp").addEventListener("click", addExp);
         document.getElementById("add_skill").addEventListener("click", addSkill);
@@ -93,14 +95,16 @@
           <form name="exp${num_exp}">
             <label for="job_tile">Title: </label>
             <input type="text" id="job_title" name="job_title"><br/><br/>
+            <label for="company">Company: </label>
+            <input type="text" id="company" name="company"><br/><br/>
+            <label for="location">Location: </label>
+            <input type="text" id="location" name="location"><br/><br/>
             <label for="exp_start_date">Start Date: </label>
             <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
             <label for="exp_end_date">End Date: </label>
             <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
             <label for="description">Description: </label>
             <input type="text" id="description" name="description"><br/><br/>
-            <label for="location">Location: </label>
-            <input type="text" id="location" name="location"><br/><br/>
           </form><br/><br/>
         `;
         document.getElementById("exp").appendChild(exp_item);
@@ -173,10 +177,11 @@
             if (document.forms[`exp${i}`]["job_title"].value != "") {
               var exp = {
                 title: document.forms[`exp${i}`]["job_title"].value,
+                company: document.forms[`exp${i}`]["company"].value,
+                location: document.forms[`exp${i}`]["location"].value,
                 startDate: document.forms[`exp${i}`]["exp_start_date"].value,
                 endDate: document.forms[`exp${i}`]["exp_end_date"].value,
-                description: document.forms[`exp${i}`]["description"].value,
-                location: document.forms[`exp${i}`]["location"].value
+                description: document.forms[`exp${i}`]["description"].value
               }
               resume["experiences"].push(exp);
             }
@@ -255,12 +260,14 @@
                 form["exp_start_date"].value != "" &&
                 form["exp_end_date"].value   != "" &&
                 form["description"].value    != "" &&
-                form["location"].value       != "") ||
+                form["location"].value       != "" &&
+                form["company"].value       != "") ||
                (form["job_title"].value      == "" &&
                 form["exp_start_date"].value == "" &&
                 form["exp_end_date"].value   == "" &&
                 form["description"].value    == "" &&
-                form["location"].value       == "" ) ;
+                form["location"].value       == "" &&
+                form["company"].value       == "") ;
         if (form["exp_start_date"].value > form["exp_end_date"].value) {
           alert("The start date of your experience has to be earlier than the end date.");
           valid = false;
@@ -298,7 +305,31 @@
         alert("Your resume has been built! Please go to \"View Resume\" page to see your resume!");
       }
 
-
+      // Note: this function fills in all the fields in the form with data
+      //       only for testing purposes. Please remove this function for the
+      //       final submission
+      function fill_form()
+      {
+        document.forms["info"]["fname"].value = "James";
+        document.forms["info"]["lname"].value = "Smith";
+        document.forms["info"]["addr"].value = "389 Boston Ave.";
+        document.forms["info"]["phone"].value = "654-123-987";
+        document.forms["info"]["email"].value = "test@example.com";
+        document.forms["info"]["linkedin"].value = "linkedin.com/in/james-smith12353/";
+        document.forms["info"]["description"].value = "Hi, this is just a test.";
+        document.forms["edu0"]["school_name"].value = "Tufts University";
+        document.forms["edu0"]["grad_date"].value = "2023-05-20";
+        document.forms["edu0"]["description"].value = "A Tufts Student";
+        document.forms["edu0"]["location"].value = "Medford, MA";
+        document.forms["exp0"]["job_title"].value = "Software Engineer";
+        document.forms["exp0"]["company"].value = "FaceBook";
+        document.forms["exp0"]["exp_start_date"].value = "2019-01-01";
+        document.forms["exp0"]["exp_end_date"].value = "2020-06-01";
+        document.forms["exp0"]["description"].value = "Worked as a SE";
+        document.forms["exp0"]["location"].value = "Palo Alto, CA";
+        document.getElementById("skill0").value = "Java";
+        document.getElementById("interest0").value = "Reading";
+      }
     </script>
 
     <form name="info">
