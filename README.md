@@ -1,3 +1,4 @@
 # TEKK-comp20midterm
-
-# Developer Kunal Valia
+Project Lead: Theo Henry
+Developer: Kent Guan
+Developer: Kunal Valia
