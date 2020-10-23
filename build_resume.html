@@ -292,6 +292,8 @@
         if (!getExperiences(resume)) {return;}
         if (!getSkills(resume)) {return;}
         if (!getInterests(resume)) {return;}
+
+        localStorage.setItem('resume', JSON.stringify(resume));
       }
 
 
