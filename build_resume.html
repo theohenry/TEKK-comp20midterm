@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <body>
+    <h1>Build Your Resume Here</h1>
+    <script language="javascript">
+      var edu_item = `
+        <label for="school_name">School Name: </label>
+        <input type="text" id="school_name" name="school_name"><br/><br/>
+        <label for="grad_date">Graduation Date: </label>
+        <input type="date" id="grad_date" name="grad_date"/><br/><br/>
+        <label for="description">Description: </label>
+        <input type="text" id="description" name="description"><br/><br/>
+        <label for="location">Location: </label>
+        <input type="text" id="location" name="location"><br/><br/>
+      `;
+
+      var exp_item =`
+        <label for="tile">Title: </label>
+        <input type="text" id="job_title" name="job_title"><br/><br/>
+        <label for="exp_start_date">Start Date: </label>
+        <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
+        <label for="exp_end_date">End Date: </label>
+        <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
+        <label for="description">Description: </label>
+        <input type="text" id="description" name="description"><br/><br/>
+        <label for="location">Location: </label>
+        <input type="text" id="location" name="location"><br/><br/>
+      `;
+
+      var skill_item = `
+        <label for="skill">Skill: </label>
+        <input type="text" id="skill" name="skill"><br/><br/>
+      `;
+
+      var interest_item = `
+        <label for="interest">Interest: </label>
+        <input type="text" id="interest" name="interest"><br/><br/>
+      `;
+
+
+      window.onload = function()
+      {
+        document.getElementById("add_edu").addEventListener("click", addEdu);
+        document.getElementById("add_exp").addEventListener("click", addExp);
+        document.getElementById("add_skill").addEventListener("click", addSkill);
+        document.getElementById("add_interest").addEventListener("click", addInterest);
+        document.getElementById("submit").addEventListener("click", submit);
+      }
+
+      function addEdu()
+      {
+        document.getElementById("edu").innerHTML += edu_item;
+      }
+
+      function addExp()
+      {
+        document.getElementById("exp").innerHTML += exp_item;
+      }
+
+      function addSkill()
+      {
+        document.getElementById("skill").innerHTML += skill_item;
+      }
+
+      function addInterest()
+      {
+        document.getElementById("interest").innerHTML += interest_item;
+      }
+
+
+    </script>
+
+    <form>
+
+      <label for="fname">First Name: </label>
+      <input type="text" id="fname" name="fname"><br/><br/>
+      <label for="lname">Last Name: </label>
+      <input type="text" id="lname" name="lname"><br/><br/>
+      <label for="addr">Address: </label>
+      <input type="text" id="addr" name="addr"><br/><br/>
+      <label for="phone">Phone: </label>
+      <input type="text" id="phone" name="phone"><br/><br/>
+      <label for="email">Email: </label>
+      <input type="text" id="email" name="email"><br/><br/>
+      <label for="linkedin">LinkedIn: </label>
+      <input type="text" id="linkedin" name="linkedin"><br/><br/>
+      <label for="description">Description: </label>
+      <input type="text" id="description" name="description"><br/><br/>
+
+      <input type="button" id="add_edu" value="Add Education"/><br/><br/>
+      <div id="edu"><div></div></div><br/><br/>
+
+      <input type="button" id="add_exp" value="Add Work Experience"/><br/><br/>
+      <div id="exp"><div></div></div><br/><br/>
+
+      <input type="button" id="add_skill" value="Add Skills"/><br/><br/>
+      <div id="skill"><div></div></div><br/><br/>
+
+      <input type="button" id="add_interest" value="Add Interest"/><br/><br/>
+      <div id="interest"><div></div></div><br/><br/>
+
+      <input type="button" id="submit" value="Done"/>
+      <br/>
+
+    </form>
+    <br/>
+  </body>
+</html>
