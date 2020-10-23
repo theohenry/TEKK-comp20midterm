@@ -8,43 +8,18 @@
   <body>
     <h1>Build Your Resume Here</h1>
     <script language="javascript">
-      var edu_item = `
-        <label for="school_name">School Name: </label>
-        <input type="text" id="school_name" name="school_name"><br/><br/>
-        <label for="grad_date">Graduation Date: </label>
-        <input type="date" id="grad_date" name="grad_date"/><br/><br/>
-        <label for="description">Description: </label>
-        <input type="text" id="description" name="description"><br/><br/>
-        <label for="location">Location: </label>
-        <input type="text" id="location" name="location"><br/><br/>
-      `;
-
-      var exp_item =`
-        <label for="tile">Title: </label>
-        <input type="text" id="job_title" name="job_title"><br/><br/>
-        <label for="exp_start_date">Start Date: </label>
-        <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
-        <label for="exp_end_date">End Date: </label>
-        <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
-        <label for="description">Description: </label>
-        <input type="text" id="description" name="description"><br/><br/>
-        <label for="location">Location: </label>
-        <input type="text" id="location" name="location"><br/><br/>
-      `;
-
-      var skill_item = `
-        <label for="skill">Skill: </label>
-        <input type="text" id="skill" name="skill"><br/><br/>
-      `;
-
-      var interest_item = `
-        <label for="interest">Interest: </label>
-        <input type="text" id="interest" name="interest"><br/><br/>
-      `;
-
+      var num_edu = 0;
+      var num_exp = 0;
+      var num_skill = 0;
+      var num_interest = 0;
 
       window.onload = function()
       {
+        addEdu();
+        addExp();
+        addSkill();
+        addInterest();
+
         document.getElementById("add_edu").addEventListener("click", addEdu);
         document.getElementById("add_exp").addEventListener("click", addExp);
         document.getElementById("add_skill").addEventListener("click", addSkill);
@@ -54,29 +29,128 @@
 
       function addEdu()
       {
+        var edu_item = `
+          <form name="edu${num_edu}">
+            <label for="school_name">School Name: </label>
+            <input type="text" id="school_name" name="school_name"><br/><br/>
+            <label for="grad_date">Graduation Date: </label>
+            <input type="date" id="grad_date" name="grad_date"/><br/><br/>
+            <label for="description">Description: </label>
+            <input type="text" id="description" name="description"><br/><br/>
+            <label for="location">Location: </label>
+            <input type="text" id="location" name="location"><br/><br/>
+          </form>
+        `;
         document.getElementById("edu").innerHTML += edu_item;
+        num_edu++;
       }
 
       function addExp()
       {
+        var exp_item =`
+          <form name="exp${num_exp}">
+            <label for="job_tile">Title: </label>
+            <input type="text" id="job_title" name="job_title"><br/><br/>
+            <label for="exp_start_date">Start Date: </label>
+            <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
+            <label for="exp_end_date">End Date: </label>
+            <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
+            <label for="description">Description: </label>
+            <input type="text" id="description" name="description"><br/><br/>
+            <label for="location">Location: </label>
+            <input type="text" id="location" name="location"><br/><br/>
+          </form>
+        `;
         document.getElementById("exp").innerHTML += exp_item;
+        num_exp++;
       }
 
       function addSkill()
       {
+        var skill_item = `
+          <label for="skill${num_skill}">Skill: </label>
+          <input type="text" id="skill${num_skill}" name="skill${num_skill}"><br/><br/>
+        `;
         document.getElementById("skill").innerHTML += skill_item;
+        num_skill++;
       }
 
       function addInterest()
       {
+        var interest_item = `
+          <label for="interest${num_interest}">Interest: </label>
+          <input type="text" id="interest${num_interest}" name="interest${num_interest}"><br/><br/>
+        `;
         document.getElementById("interest").innerHTML += interest_item;
+        num_interest++;
       }
 
+      function getEducations(resume)
+      {
+        for (let i = 0; i < num_edu; i++) {
+          var edu = {
+            schoolName: document.forms[`edu${i}`]["school_name"].value,
+            gradDate: document.forms[`edu${i}`]["grad_date"].value,
+            description: document.forms[`edu${i}`]["description"].value,
+            location: document.forms[`edu${i}`]["location"].value
+          }
+          resume["educations"].push(edu);
+        }
+      }
+
+      function getExperiences(resume)
+      {
+        for (let i = 0; i < num_exp; i++) {
+          var exp = {
+            title: document.forms[`exp${i}`]["job_title"].value,
+            startDate: document.forms[`exp${i}`]["exp_start_date"].value,
+            endDate: document.forms[`exp${i}`]["exp_end_date"].value,
+            description: document.forms[`exp${i}`]["description"].value,
+            location: document.forms[`exp${i}`]["location"].value
+          }
+          resume["experiences"].push(exp);
+        }
+      }
+
+      function getSkills(resume)
+      {
+        for (let i = 0; i < num_skill; i++) {
+          resume["experiences"].push(document.getElementById(`skill${i}`).value);
+        }
+      }
+
+      function getInterests(resume)
+      {
+        for (let i = 0; i < num_interest; i++) {
+          resume["interests"].push(document.getElementById(`interest${i}`).value);
+        }
+      }
+
+      function submit()
+      {
+        var resume = {
+          firstName: document.forms["info"]["fname"].value,
+          lastName: document.forms["info"]["lname"].value,
+          address: document.forms["info"]["addr"].value,
+          phone: document.forms["info"]["phone"].value,
+          email: document.forms["info"]["email"].value,
+          linkedin: document.forms["info"]["linkedin"].value,
+          description: document.forms["info"]["description"].value,
+          educations: [],
+          experiences: [],
+          skills: [],
+          interests: []
+        };
+        getEducations(resume);
+        getExperiences(resume);
+        getSkills(resume);
+        getInterests(resume);
+        console.log(resume.interests[0]);
+      }
 
     </script>
 
-    <form>
-
+    <form name="info">
       <label for="fname">First Name: </label>
       <input type="text" id="fname" name="fname"><br/><br/>
       <label for="lname">Last Name: </label>
@@ -91,23 +165,22 @@
       <input type="text" id="linkedin" name="linkedin"><br/><br/>
       <label for="description">Description: </label>
       <input type="text" id="description" name="description"><br/><br/>
-
-      <input type="button" id="add_edu" value="Add Education"/><br/><br/>
-      <div id="edu"><div></div></div><br/><br/>
-
-      <input type="button" id="add_exp" value="Add Work Experience"/><br/><br/>
-      <div id="exp"><div></div></div><br/><br/>
-
-      <input type="button" id="add_skill" value="Add Skills"/><br/><br/>
-      <div id="skill"><div></div></div><br/><br/>
-
-      <input type="button" id="add_interest" value="Add Interest"/><br/><br/>
-      <div id="interest"><div></div></div><br/><br/>
-
-      <input type="button" id="submit" value="Done"/>
-      <br/>
-
     </form>
+
+    <input type="button" id="add_edu" value="Add Education"/><br/><br/>
+    <div id="edu"><div></div></div><br/><br/>
+
+    <input type="button" id="add_exp" value="Add Work Experience"/><br/><br/>
+    <div id="exp"><div></div></div><br/><br/>
+
+    <input type="button" id="add_skill" value="Add Skills"/><br/><br/>
+    <div id="skill"><div></div></div><br/><br/>
+
+    <input type="button" id="add_interest" value="Add Interest"/><br/><br/>
+    <div id="interest"><div></div></div><br/><br/>
+
+    <input type="button" id="submit" value="Done"/>
+    <br/>
     <br/>
   </body>
 </html>
