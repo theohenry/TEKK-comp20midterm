@@ -49,13 +49,13 @@
         addSkill();
         addInterest();
 
-        fill_form(); // Note: this function is only for testing purposes
-
         document.getElementById("add_edu").addEventListener("click", addEdu);
         document.getElementById("add_exp").addEventListener("click", addExp);
         document.getElementById("add_skill").addEventListener("click", addSkill);
         document.getElementById("add_interest").addEventListener("click", addInterest);
         document.getElementById("submit").addEventListener("click", submit);
+
+        fill_form(); // Note: this function is only for testing purposes
       }
 
       //------------------ functions to add elements to the html ----------------------
@@ -71,8 +71,8 @@
           <form name="edu${num_edu}">
             <label for="school_name">School Name: </label>
             <input type="text" id="school_name" name="school_name"><br/><br/>
-            <label for="grad_date">Graduation Date: </label>
-            <input type="date" id="grad_date" name="grad_date"/><br/><br/>
+            <label for="grad_date">Graduation Year: </label>
+            <input type="number" id="grad_date" name="grad_date" min="1900" max="2099" step="1"/><br/><br/>
             <label for="description">Description: </label>
             <input type="text" id="description" name="description"><br/><br/>
             <label for="location">Location: </label>
@@ -301,8 +301,8 @@
         if (!getInterests(resume)) {return;}
 
         localStorage.setItem('resume', JSON.stringify(resume));
-
-        alert("Your resume has been built! Please go to \"View Resume\" page to see your resume!");
+        alert("Your resume has been built!");
+        window.location.replace("view_resume.html");
       }
 
       // Note: this function fills in all the fields in the form with data
@@ -310,6 +310,8 @@
       //       final submission
       function fill_form()
       {
+        document.getElementById("add_edu").click();
+
         document.forms["info"]["fname"].value = "James";
         document.forms["info"]["lname"].value = "Smith";
         document.forms["info"]["addr"].value = "389 Boston Ave.";
@@ -317,16 +319,24 @@
         document.forms["info"]["email"].value = "test@example.com";
         document.forms["info"]["linkedin"].value = "linkedin.com/in/james-smith12353/";
         document.forms["info"]["description"].value = "Hi, this is just a test.";
+
         document.forms["edu0"]["school_name"].value = "Tufts University";
-        document.forms["edu0"]["grad_date"].value = "2023-05-20";
+        document.forms["edu0"]["grad_date"].value = "2023";
         document.forms["edu0"]["description"].value = "A Tufts Student";
         document.forms["edu0"]["location"].value = "Medford, MA";
+
+        document.forms["edu1"]["school_name"].value = "Harvard University";
+        document.forms["edu1"]["grad_date"].value = "2025";
+        document.forms["edu1"]["description"].value = "A Harvard Student";
+        document.forms["edu1"]["location"].value = "Medford, MA";
+
         document.forms["exp0"]["job_title"].value = "Software Engineer";
         document.forms["exp0"]["company"].value = "FaceBook";
         document.forms["exp0"]["exp_start_date"].value = "2019-01-01";
         document.forms["exp0"]["exp_end_date"].value = "2020-06-01";
         document.forms["exp0"]["description"].value = "Worked as a SE";
         document.forms["exp0"]["location"].value = "Palo Alto, CA";
+
         document.getElementById("skill0").value = "Java";
         document.getElementById("interest0").value = "Reading";
       }
