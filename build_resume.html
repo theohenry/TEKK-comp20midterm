@@ -1,4 +1,4 @@
-exp<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -93,6 +93,15 @@ exp<!DOCTYPE html>
         document.getElementById("skill").removeChild(document.getElementById("skill").childNodes[num_skill]);
       }
 
+      function currentJob(id) {
+        if (document.forms["exp"+id]["exp_end_date"].disabled) {
+          document.forms["exp"+id]["exp_end_date"].disabled = true;
+        } else {
+          document.forms["exp"+id]["exp_end_date"].disabled = false;
+          document.forms["exp"+id]["exp_end_date"].value = "";
+        }
+      }
+
       //------------------ functions to add elements to the html ----------------------
       function addEdu()
       {
@@ -138,6 +147,8 @@ exp<!DOCTYPE html>
             <input type="text" id="location" name="location"><br/><br/>
             <label for="exp_start_date">Start Date: </label>
             <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
+            <label for="curr_job">I am currently working for this job</label>
+            <input type="checkbox" name="curr_job" id="curr_job" onclick="currentJob(${num_exp})">
             <label for="exp_end_date">End Date: </label>
             <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
             <label for="description">Description: </label>
@@ -264,20 +275,25 @@ exp<!DOCTYPE html>
       function validate_exp_form(i)
       {
         let form = document.forms[`exp${i}`];
+        let endDate = form["curr_job"].checked ? "2999-12-31" : form["exp_end_date"].value;
+        let endDateEntered = form["exp_end_date"].value != "" || form["curr_job"].checked;
         let valid =
                (form["job_title"].value      != "" &&
                 form["exp_start_date"].value != "" &&
-                form["exp_end_date"].value   != "" &&
+                endDateEntered                     &&
                 form["description"].value    != "" &&
                 form["location"].value       != "" &&
-                form["company"].value       != "") ||
+                form["company"].value        != "") ||
                (form["job_title"].value      == "" &&
                 form["exp_start_date"].value == "" &&
                 form["exp_end_date"].value   == "" &&
                 form["description"].value    == "" &&
                 form["location"].value       == "" &&
-                form["company"].value       == "") ;
-        if (form["exp_start_date"].value > form["exp_end_date"].value) {
+                form["company"].value        == "") ;
+        if (!valid) {
+          return false;
+        }
+        if (form["exp_start_date"].value > endDate) {
           alert("The start date of your experience has to be earlier than the end date.");
           valid = false;
         }
