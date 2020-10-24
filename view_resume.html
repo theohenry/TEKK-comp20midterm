@@ -36,7 +36,6 @@
   <body>
     <script language="javascript">
       var resume = JSON.parse(localStorage.getItem('resume'));
-
       window.onload = function(){
         if (resume != null) {
           displayInfo();
@@ -44,7 +43,8 @@
           displayExp();
           displaySkill();
         } else {
-          alert("You have not built your resume. Please go to \"Build Resume\" page to build your resume!");
+          alert("It is time to build your resume - Guiding you to our Resume Builder!");
+          setTimeout(function() { location.replace("build_resume.html") }, 2000);
         }
       };
 
