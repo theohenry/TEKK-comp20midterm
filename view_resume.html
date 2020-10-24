@@ -3,8 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build Your Resume</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/resume_styles.css">
+    <style type="text/css">
+
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <title>View Your Resume</title>
 
   </head>
   <!-- ***********************  HEADER  ******************************** -->
@@ -28,14 +34,186 @@
   </header>
   <!-- ***********************  BODY  ******************************** -->
   <body>
-    <p>In construction...</p>
     <script language="javascript">
       var resume = JSON.parse(localStorage.getItem('resume'));
-      alert(resume["firstName"]);
-      alert(resume["experiences"][0].title);
 
+      window.onload = function(){
+        if (resume != null) {
+          displayInfo();
+          displayEdu();
+          displayExp();
+          displaySkill();
+        } else {
+          alert("You have not built your resume. Please go to \"Build Resume\" page to build your resume!");
+        }
+      };
+
+      function displayInfo()
+      {
+        $("#name").text(resume["firstName"] + " " + resume["lastName"]);
+        $("#title").text(resume["experiences"][0].title);
+        $("#email").text("Email: "+resume["email"]);
+        $("#address").text("Address: "+resume["address"]);
+        $("#phone").text("Phone: "+resume["phone"]);
+        $("#linkedin a").attr("href", resume["linkedin"]);
+        // $("#linkedin p").text("LinkedIn: ");
+        $("#linkedin a").text(resume["linkedin"]);
+        $("#personal_description").text(resume["description"]);
+      }
+
+      function displayEdu()
+      {
+        var num_edu = resume["educations"].length;
+        for (let i = 0; i < num_edu; i++) {
+          let edu_item = resume["educations"][i];
+          $("#education").append(`
+            <section>
+              <h3 class="edu-school" id="edu-school${i}">${edu_item["schoolName"]} - ${edu_item["location"]}</h3>
+              <p class="edu-time" id="edu-time${i}">Class of ${edu_item["gradDate"]}</p>
+              <p class="edu-description" id="edu-description${i}">${edu_item["description"]}</p>
+            </section>
+          `);
+        }
+      }
+
+      function displayExp()
+      {
+        var num_exp = resume["experiences"].length;
+        for (let i = 0; i < num_exp; i++) {
+          let exp_item = resume["experiences"][i];
+          $("#experience").append(`
+            <section class="job-item">
+              <div class="job-details">
+                  <h3 class="job-title" id="job-title${i}">${exp_item["title"]} at ${exp_item["company"]}</h3>
+                  <p class="job-time" id="job-time${i}">${printDate(exp_item["startDate"])} - ${printDate(exp_item["endDate"])}</p>
+              </div>
+              <div class="job-summary">
+                  <h3>Job Summary:</h3>
+                  <p id="job-description${i}">${exp_item["description"]}</p>
+              </div>
+            </section>
+          `);
+        }
+      }
+
+      function printDate(date)
+      {
+        let month = date.split('-')[1];
+        let year = date.split('-')[0];
+        switch(month)
+        {
+          case "01":
+            month = "January";
+            break;
+          case "02":
+            month = "Febuary";
+            break;
+          case "03":
+            month = "March";
+            break;
+          case "04":
+            month = "April";
+            break;
+          case "05":
+            month = "May";
+            break;
+          case "06":
+            month = "June";
+            break;
+          case "07":
+            month = "July";
+            break;
+          case "08":
+            month = "August";
+            break;
+          case "09":
+            month = "September";
+            break;
+          case "10":
+            month = "October";
+            break;
+          case "11":
+            month = "November";
+            break;
+          case "12":
+            month = "December";
+            break;
+        }
+        return (month + " " + year);
+      }
+
+      function displaySkill()
+      {
+        var num_skills = resume["skills"].length;
+        for (let i = 0; i < num_skills; i++) {
+          let skill = resume["skills"][i];
+          $("#skill").append(`
+            <p class="skill-item">${skill}</p>
+          `);
+        }
+      }
 
     </script>
+    <div id="resume">
+
+      <!-- ***********************  INFO SECTION  *********************** -->
+
+      <section class="info">
+        <div class="content-wrap">
+          <section class="info-item">
+            <div class="info-big">
+              <h1 id="name"></h1>
+              <h2 id="title"></h2>
+            </div>
+            <div class="info-small">
+              <p id="address"></p>
+              <p id="email"></p>
+              <p id="phone"></p>
+              <p id="linkedin">
+                LinkedIn: <a></a>
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ***********************  PERSONAL SUMMARY SECTION  *********************** -->
+
+      <section class="summary">
+        <div class="content-wrap divider">
+          <h2>Personal Profile</h2>
+          <p id="personal_description"></p>
+        </div>
+      </section>
+
+      <!-- ***********************  WORK EXPERIENCE  *********************** -->
+
+      <section class="work-experience">
+        <div class="content-wrap item-details divider" id="experience">
+          <h2>Work Experience</h2>
+
+        </div>
+      </section>
+
+      <!-- ******************  EDUCATION ****************** -->
+
+      <section class="education">
+        <div class="content-wrap item-details  divider" id="education">
+            <h2>Education</h2>
+
+        </div>
+      </section>
+
+      <!-- ******************  SKILL ****************** -->
+
+      <section class="skill">
+        <div class="content-wrap item-details">
+            <h2>Key Skills</h2>
+            <div id="skill"> </div>
+        </div>
+      </section>
+
+    </div>
 
   </body>
 

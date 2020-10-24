@@ -1,0 +1,172 @@
+/*
+COLOR PALETTE
+#6290C3 Blue-gray
+#C2E7DA Aero-Blue
+#F1FFE7 Honeydew
+#1A1B41 Space cadet
+#BAFF29 Bitter lime
+#343434 Dark gray, almost black
+#F9FBF2 Ivory
+#9A832E Metalic Sunburst
+*/
+
+/*---------------Global Styles------------------*/
+#resume {
+  border: solid;
+  margin: 10vw;
+}
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    color: #343434;
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+
+a {
+  color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+h1, h2 {
+    font-weight: 400;
+    margin: 0;
+}
+
+.content-wrap {
+    max-width: 800px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.divider {
+  border-bottom: 1px dashed #1A1B41;
+}
+
+.item-details h3 + p {
+    font-style: italic;
+}
+
+.item-details h3 ~ p {
+    margin: 0;
+}
+
+
+/*---------------Profile------------------*/
+
+#name {
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+    line-height: 1;
+}
+
+#title {
+    font-size: 3em;
+    margin-left: 2px;
+    font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+}
+
+.info {
+   padding-top: 40px;
+}
+
+.info-big{
+    line-height: 2;
+}
+
+.info-small{
+    line-height: 1;
+    padding-left: 25px;
+    border-left: 1px solid;
+}
+
+/*---------------Work Experience------------------*/
+
+.job-summary > h3 {
+  font-weight: normal;
+}
+
+.job-summary  p {
+  font-style: normal;
+}
+
+
+/*---------------Education------------------*/
+
+
+.education p {
+    width: 60%;
+}
+
+/*---------------Skill------------------*/
+
+.skill {
+   padding-bottom: 40px;
+}
+
+#skill{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2px;
+}
+
+.skill-item{
+  margin: 0;
+}
+
+/*---------------Responsive Styles------------------*/
+
+@media screen and (min-width: 750px) {
+    .job-item{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        column-gap: 40px;
+    }
+
+    .info-item{
+      display: grid;
+      grid-template-columns: 4fr 3fr;
+      column-gap: 20px;
+    }
+
+    header, footer {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    /* h1 {
+        font-size: 75px;
+        line-height: 0.9;
+        margin-bottom: 20px;
+    } */
+
+
+    #skill{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    h2 {
+         line-height: 1;
+    }
+
+}
