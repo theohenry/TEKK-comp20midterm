@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/resume_styles.css">
-    <style type="text/css">
-
-    </style>
     <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <title>View Your Resume</title>
@@ -36,7 +33,7 @@
   <body>
     <script language="javascript">
       var resume = JSON.parse(localStorage.getItem('resume'));
-
+      localStorage.clear();
       window.onload = function(){
         if (resume != null) {
           displayInfo();
@@ -56,7 +53,6 @@
         $("#address").text("Address: "+resume["address"]);
         $("#phone").text("Phone: "+resume["phone"]);
         $("#linkedin a").attr("href", resume["linkedin"]);
-        // $("#linkedin p").text("LinkedIn: ");
         $("#linkedin a").text(resume["linkedin"]);
         $("#personal_description").text(resume["description"]);
       }
