@@ -35,24 +35,20 @@
       var max_num_edu = 5;
       var max_num_exp = 7;
       var max_num_skill = 15;
-      var max_num_interest = 10;
 
       var num_edu = 0;
       var num_exp = 0;
       var num_skill = 0;
-      var num_interest = 0;
 
       window.onload = function()
       {
         addEdu();
         addExp();
         addSkill();
-        addInterest();
 
         document.getElementById("add_edu").addEventListener("click", addEdu);
         document.getElementById("add_exp").addEventListener("click", addExp);
         document.getElementById("add_skill").addEventListener("click", addSkill);
-        document.getElementById("add_interest").addEventListener("click", addInterest);
         document.getElementById("submit").addEventListener("click", submit);
 
         fill_form(); // Note: this function is only for testing purposes
@@ -127,22 +123,6 @@
         num_skill++;
       }
 
-      function addInterest()
-      {
-        if (num_interest == max_num_interest) {
-          alert("Too many interests.");
-          return;
-        }
-
-        var interest_item = document.createElement("DIV");
-        interest_item.innerHTML = `
-          <label for="interest${num_interest}">Interest: </label>
-          <input type="text" id="interest${num_interest}" name="interest${num_interest}"><br/><br/>
-        `;
-        document.getElementById("interest").appendChild(interest_item);
-        num_interest++;
-      }
-
       //------------------ functions to get values from the html ----------------------
       function getEducations(resume)
       {
@@ -211,19 +191,6 @@
         return true;
       }
 
-      function getInterests(resume)
-      {
-        for (let i = 0; i < num_interest; i++) {
-          if (document.getElementById(`interest${i}`).value != "") {
-            resume["interests"].push(document.getElementById(`interest${i}`).value);
-          }
-        }
-        if (resume["interests"].length == 0) {
-          alert("At least one interest required.");
-          return false;
-        }
-        return true;
-      }
 
       //------------------ functions to validate input values ----------------------
 
@@ -293,12 +260,10 @@
           educations: [],
           experiences: [],
           skills: [],
-          interests: []
         };
         if (!getEducations(resume)) {return;}
         if (!getExperiences(resume)) {return;}
         if (!getSkills(resume)) {return;}
-        if (!getInterests(resume)) {return;}
 
         localStorage.setItem('resume', JSON.stringify(resume));
         alert("Your resume has been built!");
@@ -338,7 +303,6 @@
         document.forms["exp0"]["location"].value = "Palo Alto, CA";
 
         document.getElementById("skill0").value = "Java";
-        document.getElementById("interest0").value = "Reading";
       }
     </script>
 
@@ -368,9 +332,6 @@
 
     <input type="button" id="add_skill" value="Add Skills"/><br/>
     <div id="skill"><p>Skills section:</p></div><br/><br/>
-
-    <input type="button" id="add_interest" value="Add Interest"/><br/>
-    <div id="interest"><p>Interests section:</p></div><br/><br/>
 
     <input type="button" id="submit" value="Done"/>
     <br/>
