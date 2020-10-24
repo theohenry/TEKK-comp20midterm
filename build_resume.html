@@ -49,31 +49,80 @@
         document.getElementById("add_edu").addEventListener("click", addEdu);
         document.getElementById("add_exp").addEventListener("click", addExp);
         document.getElementById("add_skill").addEventListener("click", addSkill);
+        document.getElementById("del_edu").addEventListener("click", delEdu);
+        document.getElementById("del_exp").addEventListener("click", delExp);
+        document.getElementById("del_skill").addEventListener("click", delSkill);
         document.getElementById("submit").addEventListener("click", submit);
 
         // fill_form(); // Note: this function is only for testing purposes
+      }
+
+      function delEdu()
+      {
+        if (num_edu == 1) {
+          document.getElementById("del_edu").disabled = true;
+          alert("You need at least one education.");
+          return;
+        }
+        document.getElementById("add_edu").disabled = false;
+        num_edu--;
+        document.getElementById("edu").removeChild(document.getElementById("edu").childNodes[num_edu]);
+      }
+
+      function delExp()
+      {
+        if (num_exp == 1) {
+          document.getElementById("del_exp").disabled = true;
+          alert("You need at least one work experience.");
+          return;
+        }
+        document.getElementById("add_exp").disabled = false;
+        num_exp--;
+        document.getElementById("exp").removeChild(document.getElementById("exp").childNodes[num_exp]);
+      }
+
+      function delSkill()
+      {
+        if (num_skill == 1) {
+          document.getElementById("del_skill").disabled = true;
+          alert("You need at least one skill.");
+          return;
+        }
+        document.getElementById("add_skill").disabled = false;
+        num_skill--;
+        document.getElementById("skill").removeChild(document.getElementById("skill").childNodes[num_skill]);
+      }
+
+      function currentJob(id) {
+        if (document.forms["exp"+id]["exp_end_date"].disabled) {
+          document.forms["exp"+id]["exp_end_date"].disabled = true;
+        } else {
+          document.forms["exp"+id]["exp_end_date"].disabled = false;
+          document.forms["exp"+id]["exp_end_date"].value = "";
+        }
       }
 
       //------------------ functions to add elements to the html ----------------------
       function addEdu()
       {
         if (num_edu == max_num_edu) {
-          alert("Too many education experiences.");
+          document.getElementById("add_edu").disabled = true;
+          alert("Too many educations.");
           return;
         }
-
+        document.getElementById("del_edu").disabled = false;
         var edu_item = document.createElement("DIV");
         edu_item.innerHTML = `
-          <form name="edu${num_edu}">
-            <label for="school_name">School Name: </label>
-            <input type="text" id="school_name" name="school_name"><br/><br/>
-            <label for="grad_date">Graduation Year: </label>
-            <input type="number" id="grad_date" name="grad_date" min="1900" max="2099" step="1"/><br/><br/>
-            <label for="description">Description: </label>
-            <input type="text" id="description" name="description"><br/><br/>
-            <label for="location">Location: </label>
-            <input type="text" id="location" name="location"><br/><br/>
-          </form><br/><br/>
+            <form name="edu${num_edu}">
+              <label for="school_name">School Name: </label>
+              <input type="text" id="school_name" name="school_name"><br/><br/>
+              <label for="grad_date">Graduation Year: </label>
+              <input type="number" id="grad_date" name="grad_date" min="1900" max="2099" step="1"/><br/><br/>
+              <label for="description">Description: </label>
+              <input type="text" id="description" name="description"><br/><br/>
+              <label for="location">Location: </label>
+              <input type="text" id="location" name="location"><br/><br/>
+            </form>
         `;
         document.getElementById("edu").appendChild(edu_item);
         num_edu++;
@@ -82,10 +131,11 @@
       function addExp()
       {
         if (num_exp == max_num_exp) {
+          document.getElementById("add_exp").disabled = true;
           alert("Too many work experiences.");
           return;
         }
-
+        document.getElementById("del_exp").disabled = false;
         var exp_item = document.createElement("DIV");
         exp_item.innerHTML = `
           <form name="exp${num_exp}">
@@ -97,6 +147,8 @@
             <input type="text" id="location" name="location"><br/><br/>
             <label for="exp_start_date">Start Date: </label>
             <input type="date" id="exp_start_date" name="exp_start_date"/><br/><br/>
+            <label for="curr_job">I am currently working for this job</label>
+            <input type="checkbox" name="curr_job" id="curr_job" onclick="currentJob(${num_exp})">
             <label for="exp_end_date">End Date: </label>
             <input type="date" id="exp_end_date" name="exp_end_date"/><br/><br/>
             <label for="description">Description: </label>
@@ -110,10 +162,11 @@
       function addSkill()
       {
         if (num_skill == max_num_skill) {
+          document.getElementById("add_skill").disabled = true;
           alert("Too many skills.");
           return;
         }
-
+        document.getElementById("del_skill").disabled = false;
         var skill_item = document.createElement("DIV");
         skill_item.innerHTML = `
           <label for="skill${num_skill}">Skill: </label>
@@ -222,20 +275,25 @@
       function validate_exp_form(i)
       {
         let form = document.forms[`exp${i}`];
+        let endDate = form["curr_job"].checked ? "2999-12-31" : form["exp_end_date"].value;
+        let endDateEntered = form["exp_end_date"].value != "" || form["curr_job"].checked;
         let valid =
                (form["job_title"].value      != "" &&
                 form["exp_start_date"].value != "" &&
-                form["exp_end_date"].value   != "" &&
+                endDateEntered                     &&
                 form["description"].value    != "" &&
                 form["location"].value       != "" &&
-                form["company"].value       != "") ||
+                form["company"].value        != "") ||
                (form["job_title"].value      == "" &&
                 form["exp_start_date"].value == "" &&
                 form["exp_end_date"].value   == "" &&
                 form["description"].value    == "" &&
                 form["location"].value       == "" &&
-                form["company"].value       == "") ;
-        if (form["exp_start_date"].value > form["exp_end_date"].value) {
+                form["company"].value        == "") ;
+        if (!valid) {
+          return false;
+        }
+        if (form["exp_start_date"].value > endDate) {
           alert("The start date of your experience has to be earlier than the end date.");
           valid = false;
         }
@@ -325,11 +383,14 @@
     </form><br/><br/>
 
     <input type="button" id="add_edu" value="Add Education"/><br/><br/>
+    <input type="button" id="del_edu" value="Delete Education"/><br/><br/>
     <div id="edu"><p>Education section:</p></div><br/><br/>
 
+    <input type="button" id="del_exp" value="Delete Work Experience"/><br/><br/>
     <input type="button" id="add_exp" value="Add Work Experience"/><br/>
     <div id="exp"><p>Work Experience section:</p></div><br/><br/>
 
+    <input type="button" id="del_skill" value="Delete Skill"/><br/><br/>
     <input type="button" id="add_skill" value="Add Skills"/><br/>
     <div id="skill"><p>Skills section:</p></div><br/><br/>
 
