@@ -1,0 +1,90 @@
+#builder {
+  margin: 10vw;
+  color: gray;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.content-wrap {
+    max-width: 800px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.item{
+  border: 1px solid;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.btn{
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn:hover{
+  background-color: #dbdbdb;
+}
+
+.btn:disabled,.btn[disabled]{
+  background-color: #dbdbdb;
+}
+
+input[type="date"]:disabled {
+  display: none;
+}
+
+.two-per-line{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  column-gap: 50px;
+}
+
+.three-per-line{
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  column-gap: 50px;
+}
+
+.field{
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #404040;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.field::placeholder{
+  color: gray;
+}
+
+.label{
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .two-per-line{
+    column-gap: 20px;
+  }
+
+  .three-per-line{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    column-gap: 20px;
+  }
+
+}
