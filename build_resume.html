@@ -6,6 +6,9 @@
     <title>Build Your Resume</title>
     <link rel="stylesheet" href="css/styles.css">
 
+    <script language="javascript">
+    
+    </script>
   </head>
   <!-- ***********************  HEADER  ******************************** -->
   <header>
@@ -30,7 +33,14 @@
   <!-- ***********************  BODY  ******************************** -->
 
   <body>
-    <h1>Build Your Resume Here</h1>
+    <div class="container">
+      <div class="box">
+        <h1>Build Your Resume Here</h1>
+      
+      
+        
+      
+    
     <script language="javascript">
       var max_num_edu = 5;
       var max_num_exp = 7;
@@ -266,8 +276,8 @@
         if (!getSkills(resume)) {return;}
 
         localStorage.setItem('resume', JSON.stringify(resume));
-        alert("Your resume has been built!");
-        window.location.replace("view_resume.html");
+        // alert("Your resume has been built!");
+        setTimeout( function() { window.location.replace("view_resume.html") }, 500);
       }
 
       // Note: this function fills in all the fields in the form with data
@@ -334,6 +344,10 @@
     <div id="skill"><p>Skills section:</p></div><br/><br/>
 
     <input type="button" id="submit" value="Done"/>
+
+  </div>
+  
+    </div>
     <br/>
     <br/>
   </body>
