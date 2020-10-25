@@ -2,6 +2,8 @@
 
 html {
     box-sizing: border-box;
+    background-color: #FFFDD0;
+    
 }
 
 *, *:before, *:after {
@@ -12,9 +14,11 @@ body {
     color: #343434;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     font-size: 15px;
     line-height: 1.5;
+    font-family: georgia, times;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
@@ -34,20 +38,31 @@ header .logo {
   position: relative;
   display: block;
   width: 200px;
-  padding: 0 0 0 0;
+  padding: 10px 10px 0 0;
   margin-left: auto;
   margin-right: auto;
 }
 
+
 .head-nav ul {
   margin-top: 10px;
   font-size: 0;
+  
+  
+  
 }
 .head-nav ul li {
   display: inline-block;
+  
 }
 .head-nav ul li a {
   display: inline-block;
+  padding: 0 20px;
+  font-size: 18px;
+  color: #333;
+  /* text-transform: uppercase; */
+  font-family: georgia, times;
+  /* color: white; */
   margin: 0 15px;
   font-size: 20px;
   color: inherit;
@@ -62,5 +77,33 @@ header .logo {
 .head-nav ul li a span {
   position: relative;
   display: inline-block;
+  padding: 13px 0 13px;
+}
+
+.head-nav ul li:first-child a {
+  padding-left: 0;
   padding: 13px 5px 13px;
 }
+
+.head-nav ul li:hover {
+  /* border: 1px solid #333;  */
+  font-weight:bold;
+}
+
+/*---------------content------------------*/
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 70vw;
+  /* height: 70vh; */
+  border: 2px solid #333;
+}
+
+
+
+
+
+

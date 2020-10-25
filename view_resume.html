@@ -11,6 +11,7 @@
     <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <title>View Your Resume</title>
+    
 
   </head>
   <!-- ***********************  HEADER  ******************************** -->
@@ -34,9 +35,11 @@
   </header>
   <!-- ***********************  BODY  ******************************** -->
   <body>
+    
     <script language="javascript">
       var resume = JSON.parse(localStorage.getItem('resume'));
       window.onload = function(){
+
         if (resume != null) {
           displayInfo();
           displayEdu();
@@ -215,6 +218,29 @@
 
     </div>
 
+    <script language="javascript">
+      // $(document).ready(function() {
+      //     $("#resume").hide();
+      //     $("#btn").click(function(){
+      //       // $("#resume").hide(100,function() {
+      //       // $("#resume").show(500);
+      //       $("#resume").slideDown(500);
+      // 
+      //       // })
+      //       // $("#resume").slideToggle(100);
+      //       })
+      // 
+      //   });
+        
+      // $( document.body ).click(function () {
+      //     $("#resume").hide();
+      //     if ( $( "temp" ).first().is( ":hidden" ) ) {
+      //         $( "temp" ).slideDown( "slow" );
+      //     } else {
+      //         $( "temp" ).hide();
+      //     }
+      //   });
+    </script>
   </body>
 
 </html>
