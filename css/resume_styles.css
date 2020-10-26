@@ -77,6 +77,7 @@ h1, h2 {
     font-weight: 700;
     font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
     line-height: 1;
+    margin-left: -95px;
 }
 
 #title {
@@ -85,12 +86,13 @@ h1, h2 {
     font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
 }
 
-.info {
+.info-resume {
    padding-top: 40px;
 }
 
 .info-big{
     line-height: 2;
+    
 }
 
 .info-small{
