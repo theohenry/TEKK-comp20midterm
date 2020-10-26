@@ -121,16 +121,40 @@ header .logo {
 
 
 /*---------------cards------------------*/
+.card-row {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 30px;
+  justify-content: center;
+}
+
 .card {
-  border: 1px solid #333;
+  border: 2px solid #333;
+  padding: 10px 10px;
   font-size: 20px;
   display: flex;
   width: 20vw;
 }
 
-#theo {
-  justify-content: center;
+.side {
+  padding: 20px 40px;
 }
+
+#name {
+  text-align: center;
+  
+}
+
+
+
+
+
+#theo {
+  /* text-align: center; */
+}
+
+
+
 
 
 
