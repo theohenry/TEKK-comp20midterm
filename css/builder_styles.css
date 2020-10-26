@@ -1,23 +1,31 @@
 #builder {
-  margin: 10vw;
   color: gray;
 }
 
 textarea {
   resize: vertical;
+  height: 15vh;
 }
 
 .content-wrap {
     max-width: 800px;
     width: 85%;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 .item{
   border: 1px solid;
   padding: 20px;
   margin-bottom: 20px;
+}
+
+#submit{
+  margin-top: 5vh;
+  width: 60%;
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .btn{
