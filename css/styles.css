@@ -46,7 +46,7 @@ header .logo {
   position: relative;
   display: block;
   width: 300px;
-  
+
   /* margin-left: auto; */
   /* margin-right: auto; */
 }
@@ -130,47 +130,6 @@ header .logo {
 .container a:hover {
   text-decoration: underline;
 }
-
-
-
-/*---------------cards------------------*/
-.card-row {
-  display: flex;
-  flex-direction: row;
-  padding: 5px 30px;
-  justify-content: center;
-}
-
-.card {
-  border: 2px solid #333;
-  padding: 10px 10px;
-  font-size: 20px;
-  display: flex;
-  width: 20vw;
-}
-
-.side {
-  padding: 20px 40px;
-}
-
-#name {
-  text-align: center;
-  padding-bottom: 10px;
-
-}
-
-.profile-picture {
-  width: 100%;
-}
-
-
-
-
-#theo {
-  /* text-align: center; */
-}
-
-
 
 
 

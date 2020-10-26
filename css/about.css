@@ -1,0 +1,42 @@
+
+#abouthtml {
+    background: url(../img/abstract.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .teambox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cardbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .card {
+    font-size: 20px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .profile-picture {
+    height: 15vw;
+    width: 20vw;
+    border-radius: 50px;
+  }
