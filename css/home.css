@@ -31,3 +31,7 @@ h1 {
     height: 60px;
 
 }
+
+.btn:hover {
+  filter: brightness(95%);
+}

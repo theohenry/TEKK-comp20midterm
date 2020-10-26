@@ -37,18 +37,31 @@ header {
 }
 
 /*---------------header------------------*/
+.head-nav {
+  display: flex;
+  flex-direction: row;
+}
+
 header .logo {
   position: relative;
   display: block;
-  width: 200px;
-  padding: 10px 10px 0 0;
-  margin-left: auto;
-  margin-right: auto;
+  width: 300px;
+  
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 }
 
+.logo-nav {
+  padding: 20px 40px 0 0;
+}
+
+.menu {
+  padding-top: 40px;
+  font-size: 30px;
+}
 
 .head-nav ul {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   font-size: 0;
 
 
@@ -61,12 +74,11 @@ header .logo {
 .head-nav ul li a {
   display: inline-block;
   padding: 0 20px;
-  font-size: 18px;
   color: #333;
-  /* text-transform: uppercase; */
-  font-family: georgia, times;
+  text-transform: uppercase;
+  font-family: helvetica, arial;
   /* color: white; */
-  margin: 0 15px;
+  /* margin: 0 15px; */
   font-size: 20px;
   color: inherit;
   /* text-transform: uppercase; */
@@ -77,16 +89,19 @@ header .logo {
 .head-nav ul li a span {
   position: relative;
   display: inline-block;
-  padding: 13px 0 13px;
+  /* padding: 13px 0 13px; */
+}
+
+.head-nav ul li:first-child {
+  padding-top: 10px;
 }
 
 .head-nav ul li:first-child a {
   padding-left: 0;
-  padding: 13px 5px 13px;
+  /* padding: 13px 5px 13px; */
 }
 
 .head-nav ul li:hover {
-  /* border: 1px solid #333;  */
   font-weight:bold;
 }
 
