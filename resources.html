@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/builder_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style type="text/css">
+      .resource-content{
+        display: none;
+      }
+      .content-wrap {
+          max-width: 800px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 20px 10px;
+      }
 
+    </style>
   </head>
   <!-- ***********************  HEADER  ******************************** -->
   <header>
@@ -28,12 +41,92 @@
   </header>
   <!-- ***********************  BODY  ******************************** -->
   <body>
+    <script language="javascript">
+      var colors = ["#e6e6e6", "#c4c4c4", "#8f8f8f", "#6e6e6e"];
+      var resources = [];
+      $(document).ready(function(){
+        colorItems();
+
+        $(".resource-item").click(function(){
+          $(this).children( ".resource-content" ).slideToggle("slow");
+        });
+
+        $("#post-tag").click(function(){
+          $("#post-form").slideToggle("slow");
+        });
+
+
+        $("#submit").click(function(){
+          var title = $('#post-resource').find('input[name="resource-title"]').val();
+          var content = linkify($('#post-resource').find('textarea[name="resource-content"]').val());
+          if (title == "" || content == "") {
+            alert("Cannot post an empty submission.");
+            return;
+          }
+
+          var resource_item = document.createElement("DIV");
+          resource_item.innerHTML = `
+              <div class="resource-item">
+                <h2 class="content-wrap">${title}</h2>
+                <p class="content-wrap resource-content">${content}</p>
+              </div>
+          `;
+          $( "#display-resource" ).prepend(resource_item);
+          colorItems();
+          $(".resource-item").first().click(function(){
+            $(this).children( ".resource-content" ).slideToggle("slow");
+          });
+        });
+
+
+      });
+
+      function colorItems()
+      {
+        $(".resource-item").each(function(i, obj) {
+          $(obj).css("background-color", colors[i % colors.length]);
+        });
+      }
+
+      // This function is from https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+      function linkify(text) {
+        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlRegex, function(url) {
+            return '<a href="' + url + '">' + "(link)" + '</a>';
+        });
+    }
+
+    </script>
     <div class="container">
       <div class="box">
         <h1>Resources</h1>
-        <p class="content">
-          Job resources
-        </p>
+        <div id="resources">
+
+          <div id="post-resource">
+              <h2 class="content-wrap" id="post-tag">Click here to post a new resource</h2>
+              <form class="content-wrap resource-content" name="post-resource" id="post-form">
+                <input class="field" type="text" id="resource-title" name="resource-title" placeholder="Title">
+                <label class="label" for="resource-title">Title</label>
+                <textarea class="field" type="text" id="resource-content" name="resource-content" placeholder="Content" rows="1000"></textarea>
+                <label class="label" for="resource-content">Content</label>
+                <input class="btn" type="button" id="submit" value="Submit"/>
+              </form>
+          </div>
+
+          <div id="display-resource">
+            <div class="resource-item">
+              <h2 class="content-wrap">How to Find an Internship</h2>
+              <p class="content-wrap resource-content">Please check out this YouTube video at <a href="https://www.youtube.com/watch?v=Ru8s5qjMKdU">(link)</a>.</p>
+            </div>
+            <div class="resource-item">
+              <h2 class="content-wrap">7 Virtual Job Interview Tips - How to PREPARE FOR A VIRTUAL JOB INTERVIEW 2020</h2>
+              <p class="content-wrap resource-content">Please View This Video Here at <a href="https://www.youtube.com/watch?v=dIPIDbcEpyQ">(link)</a></p>
+            </div>
+          </div>
+
+
+
+        </div>
       </div>
     </div>
   </body>
