@@ -1,0 +1,35 @@
+html {
+    background: url(../img/contactBG.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#contact {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    padding-top: 5vh;
+    font-weight: 500;
+    font-size: 50px;
+    display: block;
+    text-align: left;
+}
+
+h5 {
+    margin-top: -2vh;
+    padding-left: 5vh;
+    font-weight: 500;
+    font-size: 20px;
+    display: block;
+    text-align: left;
+}
+
+.content {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
