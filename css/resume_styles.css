@@ -75,15 +75,15 @@ h1, h2 {
 #name {
     font-size: 4em;
     font-weight: 700;
-    font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+    font-family: times, Helvetica, Arial, sans-serif;
     line-height: 1;
-    margin-left: -130px;
+    margin-left: -131px;
 }
 
 #title {
     font-size: 3em;
-    margin-left: 2px;
-    font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+    margin-left: -5px;
+    font-family: Times, Helvetica, Arial, sans-serif;
 }
 
 .info-resume {
