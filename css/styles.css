@@ -16,7 +16,7 @@ body {
     padding: 0;
     font-size: 15px;
     line-height: 1.5;
-    font-family: georgia, times;
+    font-family: helvetica, arial;
     margin-left: auto;
     margin-right: auto;
 }
@@ -40,6 +40,7 @@ header {
 .head-nav {
   display: flex;
   flex-direction: row;
+  background-color: white;
 }
 
 header .logo {
