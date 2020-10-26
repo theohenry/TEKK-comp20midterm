@@ -1,5 +1,5 @@
 html {
-    background: url(../img/contactBG.jpg) no-repeat center center fixed;
+    background: url(../img/donate-gradient.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -7,7 +7,7 @@ html {
 }
 
 
-#contact {
+#donate {
     font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -21,7 +21,7 @@ h1 {
 
 h2 {
     margin-top: -2vh;
-    padding-left: 5vh;
+    padding-left: 0vh;
     font-weight: 500;
     font-size: 20px;
     display: block;
