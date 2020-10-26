@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build Your Resume</title>
     <link rel="stylesheet" href="css/styles.css">
-    
+
     <script language="javascript">
-    
+
     </script>
     <link rel="stylesheet" href="css/builder_styles.css">
   </head>
@@ -34,14 +34,6 @@
   <!-- ***********************  BODY  ******************************** -->
 
   <body>
-    <div class="container">
-      <div class="box">
-        <h1>Build Your Resume Here</h1>
-      
-      
-        
-      
-    
     <script language="javascript">
       var max_num_edu = 5;
       var max_num_exp = 7;
@@ -76,8 +68,8 @@
           return;
         }
         document.getElementById("add_edu").disabled = false;
-        num_edu--;
         document.getElementById("edu").removeChild(document.getElementById("edu").childNodes[num_edu]);
+        num_edu--;
       }
 
 
@@ -89,8 +81,8 @@
           return;
         }
         document.getElementById("add_exp").disabled = false;
-        num_exp--;
         document.getElementById("exp").removeChild(document.getElementById("exp").childNodes[num_exp]);
+        num_exp--;
       }
 
       function delSkill()
@@ -101,8 +93,8 @@
           return;
         }
         document.getElementById("add_skill").disabled = false;
-        num_skill--;
         document.getElementById("skill").removeChild(document.getElementById("skill").childNodes[num_skill]);
+        num_skill--;
       }
 
       function currentJob(id) {
@@ -392,90 +384,62 @@
       }
     </script>
 
-    <form name="info">
-      <p>Basic information section:</p>
-      <label for="fname">First Name: </label>
-      <input type="text" id="fname" name="fname" required><br/><br/>
-      <label for="lname">Last Name: </label>
-      <input type="text" id="lname" name="lname" ><br/><br/>
-      <label for="addr">Address: </label>
-      <input type="text" id="addr" name="addr"><br/><br/>
-      <label for="phone">Phone: </label>
-      <input type="text" id="phone" name="phone"><br/><br/>
-      <label for="email">Email: </label>
-      <input type="text" id="email" name="email"><br/><br/>
-      <label for="linkedin">LinkedIn: </label>
-      <input type="text" id="linkedin" name="linkedin"><br/><br/>
-      <label for="description">Description: </label>
-      <input type="text" id="description" name="description"><br/><br/>
-    </form><br/><br/>
+    <div class="container">
+      <div class="box">
+        <h1>Build Your Resume Here</h1>
+        <div id="builder">
+          <div class="content-wrap">
+            <form name="info">
+              <h2>Basic information:</h2>
+              <div class="item">
+                <div class="two-per-line">
+                  <input class="field" type="text" id="fname" name="fname" placeholder="First Name">
+                  <label class="label" for="fname">First Name</label>
+                  <input class="field" type="text" id="lname" name="lname" placeholder="Last Name">
+                  <label class="label" for="lname">Last Name</label>
+                </div>
+                <input class="field" type="text" id="addr" name="addr" placeholder="Address">
+                <label class="label" for="addr">Address</label>
 
-    <input type="button" id="add_edu" value="Add Education"/><br/><br/>
-    <div id="edu"><p>Education section:</p></div><br/><br/>
+                <input class="field" type="text" id="phone" name="phone" placeholder="Phone">
+                <label class="label" for="phone">Phone: </label>
 
-    <input type="button" id="add_exp" value="Add Work Experience"/><br/>
-    <div id="exp"><p>Work Experience section:</p></div><br/><br/>
+                <input class="field" type="text" id="email" name="email" placeholder="Email">
+                <label class="label" for="email">Email: </label>
 
-    <input type="button" id="add_skill" value="Add Skills"/><br/>
-    <div id="skill"><p>Skills section:</p></div><br/><br/>
+                <input class="field" type="text" id="linkedin" name="linkedin" placeholder="LinkedIn">
+                <label class="label" for="linkedin">LinkedIn: </label>
 
-    <input type="button" id="submit" value="Done"/>
-
-  </div>
-  
-    </div>
-    <br/>
-    <br/>
-    <div id="builder">
-      <div class="content-wrap">
-        <form name="info">
-          <h2>Basic information:</h2>
-          <div class="item">
-          <div class="two-per-line">
-              <input class="field" type="text" id="fname" name="fname" placeholder="First Name">
-              <label class="label" for="fname">First Name</label>
-              <input class="field" type="text" id="lname" name="lname" placeholder="Last Name">
-              <label class="label" for="lname">Last Name</label>
-            </div>
-            <input class="field" type="text" id="addr" name="addr" placeholder="Address">
-            <label class="label" for="addr">Address</label>
-
-            <input class="field" type="text" id="phone" name="phone" placeholder="Phone">
-            <label class="label" for="phone">Phone: </label>
-
-            <input class="field" type="text" id="email" name="email" placeholder="Email">
-            <label class="label" for="email">Email: </label>
-
-            <input class="field" type="text" id="linkedin" name="linkedin" placeholder="LinkedIn">
-            <label class="label" for="linkedin">LinkedIn: </label>
-
-            <textarea class="field" type="text" id="description" name="description" placeholder="Personal Summary" rows="10"></textarea>
-            <label class="label" for="description">Description: </label>
+                <textarea class="field" type="text" id="description" name="description" placeholder="Personal Summary" rows="10"></textarea>
+                <label class="label" for="description">Description: </label>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
 
 
-      <div class="content-wrap">
-        <div id="edu"><h2>Education:</h2></div>
-        <input class="btn" type="button" id="add_edu" value="Add Education"/>
-        <input class="btn" type="button" id="del_edu" value="Delete Education"/>
-      </div>
+          <div class="content-wrap">
+            <div id="edu"><h2>Education:</h2></div>
+            <input class="btn" type="button" id="add_edu" value="Add Education"/>
+            <input class="btn" type="button" id="del_edu" value="Delete Education"/>
+          </div>
 
-      <div class="content-wrap">
-        <div id="exp"><h2>Work Experience:</h2></div>
-        <input class="btn" type="button" id="add_exp" value="Add Work Experience"/>
-        <input class="btn" type="button" id="del_exp" value="Delete Work Experience"/>
-      </div>
+          <div class="content-wrap">
+            <div id="exp"><h2>Work Experience:</h2></div>
+            <input class="btn" type="button" id="add_exp" value="Add Work Experience"/>
+            <input class="btn" type="button" id="del_exp" value="Delete Work Experience"/>
+          </div>
 
-      <div class="content-wrap">
-        <div id="skill"><h2>Skills:</h2></div>
-        <input class="btn" type="button" id="add_skill" value="Add Skills"/>
-        <input class="btn" type="button" id="del_skill" value="Delete Skill"/>
-      </div>
+          <div class="content-wrap">
+            <div id="skill"><h2>Skills:</h2></div>
+            <input class="btn" type="button" id="add_skill" value="Add Skills"/>
+            <input class="btn" type="button" id="del_skill" value="Delete Skill"/>
+          </div>
 
-      <div class="content-wrap">
-        <input class="btn" type="button" id="submit" value="Done"/>
+          <div class="content-wrap">
+            <input class="btn" type="button" id="submit" value="Done"/>
+          </div>
+
+        </div>
       </div>
     </div>
   </body>

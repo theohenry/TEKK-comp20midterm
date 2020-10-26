@@ -3,7 +3,7 @@
 html {
     box-sizing: border-box;
     background-color: #FFFDD0;
-    
+
 }
 
 *, *:before, *:after {
@@ -47,13 +47,13 @@ header .logo {
 .head-nav ul {
   margin-top: 10px;
   font-size: 0;
-  
-  
-  
+
+
+
 }
 .head-nav ul li {
   display: inline-block;
-  
+
 }
 .head-nav ul li a {
   display: inline-block;
@@ -94,11 +94,14 @@ header .logo {
 .container {
   display: flex;
   justify-content: center;
+  padding-bottom: 5vh;
+  padding-top: 2vh;
 }
 
 .box {
   width: 70vw;
   border: 2px solid #333;
+  padding-bottom: 3vh;
 }
 
 
