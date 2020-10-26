@@ -57,7 +57,7 @@
         document.getElementById("del_skill").addEventListener("click", delSkill);
         document.getElementById("submit").addEventListener("click", submit);
 
-        // fill_form(); // Note: this function is only for testing purposes
+        fill_form(); // Note: this function is only for testing purposes
       }
 
       function delEdu()
@@ -119,7 +119,7 @@
         var edu_item = document.createElement("DIV");
         edu_item.innerHTML = `
             <div name="edu${num_edu}">
-              <form class="item">
+              <form name="edu${num_edu}" class="item">
                 <div class="three-per-line">
                   <input class="field" type="text" id="school_name" name="school_name" placeholder="School Name">
                   <label class="label" for="school_name">School Name: </label>
