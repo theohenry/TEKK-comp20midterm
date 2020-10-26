@@ -81,6 +81,7 @@
           return;
         }
         document.getElementById("add_exp").disabled = false;
+        console.log(document.getElementById("edu").childNodes.length);
         document.getElementById("exp").removeChild(document.getElementById("exp").childNodes[num_exp]);
         num_exp--;
       }
@@ -117,24 +118,27 @@
         document.getElementById("del_edu").disabled = false;
         var edu_item = document.createElement("DIV");
         edu_item.innerHTML = `
-            <form name="edu${num_edu}" class="item">
-              <div class="three-per-line">
-                <input class="field" type="text" id="school_name" name="school_name" placeholder="School Name">
-                <label class="label" for="school_name">School Name: </label>
+            <div name="edu${num_edu}">
+              <form class="item">
+                <div class="three-per-line">
+                  <input class="field" type="text" id="school_name" name="school_name" placeholder="School Name">
+                  <label class="label" for="school_name">School Name: </label>
 
-                <input class="field" type="text" id="location" name="location" placeholder="School Location">
-                <label class="label" for="location">Location: </label>
+                  <input class="field" type="text" id="location" name="location" placeholder="School Location">
+                  <label class="label" for="location">Location: </label>
 
-                <input class="field" type="number" id="grad_date" name="grad_date" min="1900" max="2099" step="1" placeholder="Graduation Year"/>
-                <label class="label" for="grad_date">Graduation Year: </label>
-              </div>
+                  <input class="field" type="number" id="grad_date" name="grad_date" min="1900" max="2099" step="1" placeholder="Graduation Year"/>
+                  <label class="label" for="grad_date">Graduation Year: </label>
+                </div>
 
-              <textarea class="field" type="text" id="description" name="description" placeholder="Education Description" rows="5"></textarea>
-              <label class="label" for="description">Description: </label>
-            </form>
+                <textarea class="field" type="text" id="description" name="description" placeholder="Education Description" rows="5"></textarea>
+                <label class="label" for="description">Description: </label>
+              </form>
+            </div>
         `;
         document.getElementById("edu").appendChild(edu_item);
         num_edu++;
+        console.log(num_edu);
       }
 
       function addExp()
@@ -418,9 +422,7 @@
 
 
           <div class="content-wrap">
-            <div id="edu">
-              <h2>Education:</h2>
-            </div>
+            <div id="edu"><h2>Education:</h2></div>
             <input class="btn" type="button" id="add_edu" value="Add Education"/>
             <input class="btn" type="button" id="del_edu" value="Delete Education"/>
           </div>
