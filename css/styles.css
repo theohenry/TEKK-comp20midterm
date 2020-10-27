@@ -30,6 +30,8 @@ h3 {
 }
 
 
+
+
 header {
     text-align: center;
 }
@@ -62,6 +64,9 @@ header .logo {
 .head-nav ul {
   /* margin-top: 10px; */
   font-size: 0;
+
+
+
 }
 .head-nav ul li {
   display: inline-block;
@@ -132,7 +137,7 @@ header .logo {
     width: 100vw;
     display: flex;
   }
-
+  
   .head-nav {
     flex-direction: column;
   }
