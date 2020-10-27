@@ -284,16 +284,16 @@
       function validate_info_form()
       {
         let form = document.forms["info"];
-        let valid = true;
-        valid &&= validate_field(form, "fname");
-        valid &&= validate_field(form, "lname");
-        valid &&= validate_field(form, "addr");
-        valid &&= validate_field(form, "phone");
-        valid &&= validate_field(form, "email");
-        valid &&= validate_field(form, "linkedin");
-        valid &&= validate_field(form, "description");
-
-        return valid;
+        // let valid = true;
+        return (validate_field(form, "fname") &&
+              validate_field(form, "fname") &&
+              validate_field(form, "lname") &&
+              validate_field(form, "addr") &&
+              validate_field(form, "phone") &&
+              validate_field(form, "email") &&
+              validate_field(form, "linkedin") &&
+              validate_field(form, "description")
+        );
       }
 
       function validate_field(form, name)
@@ -315,13 +315,12 @@
       function validate_edu_form(i)
       {
         let form = document.forms[`edu${i}`];
-        let valid = true;
-        valid &&= validate_field(form, "school_name");
-        valid &&= validate_field(form, "grad_date");
-        valid &&= validate_field(form, "description");
-        valid &&= validate_field(form, "location");
-
-        return valid;
+        // let valid = true;
+        return (validate_field(form, "school_name") &&
+                validate_field(form, "grad_date") &&
+                validate_field(form, "description") &&
+                validate_field(form, "location")
+        );
       }
 
       function validate_exp_form(i)
@@ -331,15 +330,15 @@
         let endDateEntered = form["exp_end_date"].value != "" || form["curr_job"].checked;
         let valid = true;
 
-        valid &&= validate_field(form, "job_title");
-        valid &&= validate_field(form, "company");
-        valid &&= validate_field(form, "location");
-        valid &&= validate_field(form, "exp_start_date");
+        valid = validate_field(form, "job_title");
+        valid = validate_field(form, "company");
+        valid = validate_field(form, "location");
+        valid = validate_field(form, "exp_start_date");
         if (!valid) {return false;}
         if (!form["curr_job"].checked) {
-          valid &&= validate_field(form, "exp_end_date");
+          valid = validate_field(form, "exp_end_date");
         }
-        valid &&= validate_field(form, "description");
+        valid =validate_field(form, "description");
 
         if (form["exp_start_date"].value > endDate) {
           alert("The start date of your experience has to be earlier than the end date.");
