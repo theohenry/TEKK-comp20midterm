@@ -77,12 +77,12 @@ h1, h2 {
     font-weight: 700;
     font-family: times, Helvetica, Arial, sans-serif;
     line-height: 1;
-    margin-left: -131px;
+    text-align: left;
 }
 
 #title {
+    text-align: left;
     font-size: 3em;
-    margin-left: -5px;
     font-family: Times, Helvetica, Arial, sans-serif;
 }
 
@@ -92,7 +92,7 @@ h1, h2 {
 
 .info-big{
     line-height: 2;
-    
+
 }
 
 .info-small{
