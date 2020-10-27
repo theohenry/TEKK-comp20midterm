@@ -137,6 +137,7 @@ header .logo {
     width: 100vw;
     display: flex;
   }
+  
   .head-nav {
     flex-direction: column;
   }

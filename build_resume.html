@@ -63,6 +63,11 @@
         // fill_form(); // Note: this function is only for testing purposes
       }
 
+
+      function inputFocus() {
+        this.style["border-bottom"] =  "2px solid red";
+      }
+
       function delEdu()
       {
         if (num_edu == 1) {
@@ -265,9 +270,11 @@
           }
         }
         if (resume["skills"].length == 0) {
+          document.getElementById(`skill0`).style["border-bottom"] =  "2px solid red";
           alert("At least one skill required.");
           return false;
         }
+        document.getElementById(`skill0`).style["border-bottom"] =  "2px solid #9b9b9b";
         return true;
       }
 
@@ -277,26 +284,44 @@
       function validate_info_form()
       {
         let form = document.forms["info"];
-        return (form["fname"].value       != "" &&
-                form["lname"].value       != "" &&
-                form["addr"].value        != "" &&
-                form["phone"].value       != "" &&
-                form["email"].value       != "" &&
-                form["linkedin"].value    != "" &&
-                form["description"].value != "");
+        let valid = true;
+        valid &&= validate_field(form, "fname");
+        valid &&= validate_field(form, "lname");
+        valid &&= validate_field(form, "addr");
+        valid &&= validate_field(form, "phone");
+        valid &&= validate_field(form, "email");
+        valid &&= validate_field(form, "linkedin");
+        valid &&= validate_field(form, "description");
+
+        return valid;
+      }
+
+      function validate_field(form, name)
+      {
+              if (form[name].value == "") {
+                if (name == "exp_end_date") {
+                  alert("Experience End Date has to be filled.");
+                } else {
+                  alert(form[name].placeholder + " has to be filled.");
+                }
+                form[name].style["border-bottom"] =  "2px solid red";
+                return false;
+              } else {
+                form[name].style["border-bottom"] =  "2px solid #9b9b9b";
+              }
+              return true;
       }
 
       function validate_edu_form(i)
       {
         let form = document.forms[`edu${i}`];
-        return (form["school_name"].value != "" &&
-                form["grad_date"].value   != "" &&
-                form["description"].value != "" &&
-                form["location"].value    != "") ||
-               (form["school_name"].value == "" &&
-                form["grad_date"].value   == "" &&
-                form["description"].value == "" &&
-                form["location"].value    == "" );
+        let valid = true;
+        valid &&= validate_field(form, "school_name");
+        valid &&= validate_field(form, "grad_date");
+        valid &&= validate_field(form, "description");
+        valid &&= validate_field(form, "location");
+
+        return valid;
       }
 
       function validate_exp_form(i)
@@ -304,26 +329,25 @@
         let form = document.forms[`exp${i}`];
         let endDate = form["curr_job"].checked ? "2999-12-31" : form["exp_end_date"].value;
         let endDateEntered = form["exp_end_date"].value != "" || form["curr_job"].checked;
-        let valid =
-               (form["job_title"].value      != "" &&
-                form["exp_start_date"].value != "" &&
-                endDateEntered                     &&
-                form["description"].value    != "" &&
-                form["location"].value       != "" &&
-                form["company"].value        != "") ||
-               (form["job_title"].value      == "" &&
-                form["exp_start_date"].value == "" &&
-                form["exp_end_date"].value   == "" &&
-                form["description"].value    == "" &&
-                form["location"].value       == "" &&
-                form["company"].value        == "") ;
-        if (!valid) {
-          return false;
+        let valid = true;
+
+        valid &&= validate_field(form, "job_title");
+        valid &&= validate_field(form, "company");
+        valid &&= validate_field(form, "location");
+        valid &&= validate_field(form, "exp_start_date");
+        if (!valid) {return false;}
+        if (!form["curr_job"].checked) {
+          valid &&= validate_field(form, "exp_end_date");
         }
+        valid &&= validate_field(form, "description");
+
         if (form["exp_start_date"].value > endDate) {
           alert("The start date of your experience has to be earlier than the end date.");
+          form["exp_start_date"].style["border-bottom"] =  "2px solid #9b9b9b";
+          form["exp_end_date"].style["border-bottom"] =  "2px solid #9b9b9b";
           valid = false;
         }
+
         return valid;
       }
 
@@ -331,7 +355,6 @@
       function submit()
       {
         if (!validate_info_form()) {
-          alert("Every field from the basic information section has to be filled");
           return;
         }
         var resume = {
